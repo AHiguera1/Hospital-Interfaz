@@ -6,24 +6,40 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
-import java.util.logging.Level;
 
 public class Observacion extends Thread{
 	private Random rnd = new Random();
-	List<Paciente> pacientes = Collections.synchronizedList(new ArrayList<Paciente>());
-	List<Paciente> reaccion = Collections.synchronizedList(new ArrayList<Paciente>());
+	List<Puesto> pacientes = Collections.synchronizedList(new ArrayList<>());
+	List<Paciente> reaccion = Collections.synchronizedList(new ArrayList<>());
 	Semaphore lleno = new Semaphore(20,true);
         private Interfaz it;
+        
+        public class Puesto{
+            Paciente p = null;
+            public Puesto(){
+                
+            }
+            
+            public Paciente getP(){
+                return this.p;
+            }
+            public void setP(Paciente p){
+                this.p = p;
+            }
+        }
         public Observacion(Interfaz it){
             this.it = it;
         }
         
-        public String puesto(Paciente p){
-        if(p.getS() == null){
-            return p.toString();
-        }else{
-            return p.toString() + ", " + p.getS().toString();
+        public String puesto(Puesto p){
+            if(p.getP() != null){ 
+                if(p.getP().getS() == null){
+                return p.getP().toString();
+            }else{
+                return p.getP().toString() + ", " + p.getP().getS().toString();
+            }
         }
+            return "";
     }
         public void run(){
         while(true){
@@ -100,8 +116,72 @@ public class Observacion extends Thread{
         }
 
     }
+    public boolean addP(Paciente p){
+        
+        for(Puesto a : pacientes){
+            if(a.getP() == null){
+                a.setP(p);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public void removeP(Paciente p){
+        for(Puesto a : pacientes){
+            if(a.getP() == p){
+                a.setP(null);
+            }
+        }
+        
+    }
+    
+       
+	public boolean observar(Paciente p) {
+		try {
+			lleno.acquire();
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		while(!addP(p)){}
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int a = rnd.nextInt(20);
+		if(a > 0) {	
+			return false;
+		}else {
+			reaccion.add(p);
+			return true;
+		}
+		
+	}
 
-    public Random getRnd() {
+	public boolean atender(Sanitario s) {
+		if(!reaccion.isEmpty()) {
+			Paciente p = reaccion.get(0);
+			p.setS(s);
+			p.getSalir().release();
+			reaccion.remove(0);
+			
+			try {Logger.log("Paciente " + p.toString() + " sufre una reaccion y es atendido por " + s.toString());
+				Thread.sleep(2000 + (long)(rnd.nextInt(3000)));
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			removeP(p);
+			lleno.release();
+			return true;
+		}
+                return false;
+	}
+        
+        public Random getRnd() {
         return rnd;
     }
 
@@ -109,14 +189,7 @@ public class Observacion extends Thread{
         this.rnd = rnd;
     }
 
-    public List<Paciente> getPacientes() {
-        return pacientes;
-    }
-
-    public void setPacientes(List<Paciente> pacientes) {
-        this.pacientes = pacientes;
-    }
-
+ 
     public List<Paciente> getReaccion() {
         return reaccion;
     }
@@ -141,48 +214,4 @@ public class Observacion extends Thread{
         this.it = it;
     }
         
-       
-	public boolean observar(Paciente p) {
-		try {
-			lleno.acquire();
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		pacientes.add(p);
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		int a = rnd.nextInt(20);
-		if(a > 0) {	
-			return false;
-		}else {
-			reaccion.add(p);
-			return true;
-		}
-		
-	}
-
-	public boolean atender(Sanitario s) {
-		if(!reaccion.isEmpty()) {
-			Paciente p = reaccion.get(0);
-			p.setS(s);
-			p.getSalir().release();
-			reaccion.remove(0);
-			Logger.log("Paciente " + p.toString() + " sufre una reaccion y es atendido por " + s.toString());
-			try {
-				Thread.sleep(2000 + (long)(rnd.nextInt(3000)));
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			pacientes.remove(p);
-			lleno.release();
-			return true;
-		}
-                return false;
-	}
 }
