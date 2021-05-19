@@ -9,7 +9,10 @@ import java.util.concurrent.Semaphore;
 
 public class Observacion extends Thread{
 	private Random rnd = new Random();
-	List<Puesto> pacientes = Collections.synchronizedList(new ArrayList<>());
+        //Pacientes no puede ser un ArrayList, pq entonces hay q añadirle puestos
+        //tiene q ser un array estatico Puesto[20], y que los accesos sean siempre a 
+        //una posicion concreta, mira los metodos addP() y removeP()
+	private Puesto[] pacientes = new Puesto[20];
 	List<Paciente> reaccion = Collections.synchronizedList(new ArrayList<>());
 	Semaphore lleno = new Semaphore(20,true);
         private Interfaz it;
@@ -29,6 +32,9 @@ public class Observacion extends Thread{
         }
         public Observacion(Interfaz it){
             this.it = it;
+            for(int i = 0; i < 20;i++){
+                pacientes[i] = new Puesto();
+            }
         }
         
         public String puesto(Puesto p){
@@ -41,69 +47,72 @@ public class Observacion extends Thread{
         }
             return "";
     }
+        @Override
         public void run(){
         while(true){
-            for (int i = 0;i < pacientes.size(); i++){
+            //System.out.println(puesto(pacientes.get(0)));
+            for (int i = 0;i < 20; i++){
                 switch(i){
                     case 0:
-                        it.getjTextField17().setText(puesto(pacientes.get(i)));
+                        it.getjTextField17().setText(puesto(pacientes[i]));
+                   
                         break;
                     case 1:
-                        it.getjTextField18().setText(puesto(pacientes.get(i)));
+                        it.getjTextField18().setText(puesto(pacientes[i]));
                         break;
                     case 2:
-                        it.getjTextField19().setText(puesto(pacientes.get(i)));
+                        it.getjTextField19().setText(puesto(pacientes[i]));
                         break;
                     case 3:
-                        it.getjTextField20().setText(puesto(pacientes.get(i)));
+                        it.getjTextField20().setText(puesto(pacientes[i]));
                         break;
                     case 4:
-                        it.getjTextField21().setText(puesto(pacientes.get(i)));
+                        it.getjTextField21().setText(puesto(pacientes[i]));
                         break;
                     case 5:
-                        it.getjTextField22().setText(puesto(pacientes.get(i)));
+                        it.getjTextField22().setText(puesto(pacientes[i]));
                         break;
                     case 6:
-                        it.getjTextField23().setText(puesto(pacientes.get(i)));
+                        it.getjTextField23().setText(puesto(pacientes[i]));
                         break;
                     case 7:
-                        it.getjTextField24().setText(puesto(pacientes.get(i)));
+                        it.getjTextField24().setText(puesto(pacientes[i]));
                         break;
                     case 8:
-                        it.getjTextField25().setText(puesto(pacientes.get(i)));
+                        it.getjTextField25().setText(puesto(pacientes[i]));
                         break;
                     case 9:
-                        it.getjTextField26().setText(puesto(pacientes.get(i)));
+                        it.getjTextField26().setText(puesto(pacientes[i]));
                         break;
                     case 10:
-                        it.getjTextField28().setText(puesto(pacientes.get(i)));
+                        it.getjTextField28().setText(puesto(pacientes[i]));
                         break;
                     case 11:
-                        it.getjTextField29().setText(puesto(pacientes.get(i)));
+                        it.getjTextField29().setText(puesto(pacientes[i]));
                         break;
                     case 12:
-                        it.getjTextField30().setText(puesto(pacientes.get(i)));
+                        it.getjTextField30().setText(puesto(pacientes[i]));
                         break;
                     case 13:
-                        it.getjTextField31().setText(puesto(pacientes.get(i)));
+                        it.getjTextField31().setText(puesto(pacientes[i]));
                         break;
                     case 14:
-                        it.getjTextField32().setText(puesto(pacientes.get(i)));
+                        it.getjTextField32().setText(puesto(pacientes[i]));
                         break;
                     case 15:
-                        it.getjTextField33().setText(puesto(pacientes.get(i)));
+                        it.getjTextField33().setText(puesto(pacientes[i]));
                         break;
                     case 16:
-                        it.getjTextField34().setText(puesto(pacientes.get(i)));
+                        it.getjTextField34().setText(puesto(pacientes[i]));
                         break;
                     case 17:
-                        it.getjTextField35().setText(puesto(pacientes.get(i)));
+                        it.getjTextField35().setText(puesto(pacientes[i]));
                         break;
                     case 18:
-                        it.getjTextField36().setText(puesto(pacientes.get(i)));
+                        it.getjTextField36().setText(puesto(pacientes[i]));
                         break;
                     case 19:
-                        it.getjTextField27().setText(puesto(pacientes.get(i)));
+                        it.getjTextField27().setText(puesto(pacientes[i]));
                         break;
                 }
 

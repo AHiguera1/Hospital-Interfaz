@@ -65,7 +65,7 @@ public class Auxiliar1 extends Thread {
 			}
 			if(cont == 10) {
                             cont = 0;
-                            System.out.println("Auxiliar A1 comienza su descanso");
+               
                             Logger.log("Auxiliar A1 comienza su descanso");
                             it.getjTextField2().setText("(Descanso)");
                             try {
