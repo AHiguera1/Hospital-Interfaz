@@ -100,6 +100,47 @@ public class Observacion extends Thread{
         }
 
     }
+
+    public Random getRnd() {
+        return rnd;
+    }
+
+    public void setRnd(Random rnd) {
+        this.rnd = rnd;
+    }
+
+    public List<Paciente> getPacientes() {
+        return pacientes;
+    }
+
+    public void setPacientes(List<Paciente> pacientes) {
+        this.pacientes = pacientes;
+    }
+
+    public List<Paciente> getReaccion() {
+        return reaccion;
+    }
+
+    public void setReaccion(List<Paciente> reaccion) {
+        this.reaccion = reaccion;
+    }
+
+    public Semaphore getLleno() {
+        return lleno;
+    }
+
+    public void setLleno(Semaphore lleno) {
+        this.lleno = lleno;
+    }
+
+    public Interfaz getIt() {
+        return it;
+    }
+
+    public void setIt(Interfaz it) {
+        this.it = it;
+    }
+        
        
 	public boolean observar(Paciente p) {
 		try {

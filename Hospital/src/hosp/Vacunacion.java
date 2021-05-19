@@ -27,7 +27,6 @@ public class Vacunacion extends Thread {
         while(true){
             ArrayList<Sanitario> aux = new ArrayList<>();
             aux.addAll(san);
-            System.out.println(aux);
             for (int i = 0;i < aux.size(); i++){
                 switch(i){
                     case 0:

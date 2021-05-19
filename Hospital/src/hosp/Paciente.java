@@ -29,6 +29,7 @@ public class Paciente extends Thread{
 			if(obser.observar(this)) {
 				salir.acquire();
 			}
+                        if(obser.getPacientes().contains(this)) obser.getPacientes().remove(this);
 			
 		} catch (InterruptedException e) {
 			e.printStackTrace();

@@ -35,6 +35,7 @@ public class Hospital extends Thread{
         
         public void run(){
 		v.start();
+                o.start();
 		aux1.start();
 		aux2.start();
 		for(int i = 0; i < 10; i++) {
