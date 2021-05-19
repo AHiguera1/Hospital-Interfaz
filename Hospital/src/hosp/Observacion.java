@@ -45,7 +45,7 @@ public class Observacion extends Thread{
                 return p.getP().toString() + ", " + p.getP().getS().toString();
             }
         }
-            return "";
+            return "\t";
     }
         @Override
         public void run(){
