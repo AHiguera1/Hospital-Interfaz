@@ -7,12 +7,15 @@ public class Auxiliar2 extends Thread{
 	private Random rnd = new Random();
 	private Vacunacion vc;
 	private Semaphore vacuna;
+        private Interfaz it;
 	
 	private int id = 2;
 	
-	public Auxiliar2(Vacunacion vc, Semaphore vacuna) {
+	public Auxiliar2(Vacunacion vc, Semaphore vacuna,Interfaz it) {
 		this.vc = vc;
 		this.vacuna = vacuna;
+                this.it = it;
+                it.getjTextField10().setText("A2");
 	}
 	
 	public void run() {
@@ -20,14 +23,13 @@ public class Auxiliar2 extends Thread{
 			int cont = 0;
 			while(true) {
 				if(cont == 20) {
-					System.out.println("Auxiliar A2 comienza su descanso");
-					Logger.log("Auxiliar A2 comienza su descanso");
+                                        Logger.log("Auxiliar A2 comienza su descanso");
 					sleep(1000 + (long)(rnd.nextInt(3000)));
 					cont = 0;				
 				}else {
 					sleep(500 + (long)(rnd.nextInt(500)));
 					vacuna.release();
-					System.out.println("Auxiliar A2 prepara una vacuna");
+                                        it.getjTextField11().setText(Integer.toString(vacuna.availablePermits()));
 					Logger.log("Auxiliar A2 prepara una vacuna");
 					cont++;
 				}

@@ -1,6 +1,7 @@
 package hosp;
 
 import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
 
 public class Paciente extends Thread{
 	private int Pid;
@@ -33,10 +34,26 @@ public class Paciente extends Thread{
 			e.printStackTrace();
 		}
 		String msg = "Paciente " + this.toString() + " ha salido del hospital";
-		System.out.println(msg);
 		Logger.log(msg);
 		
 	}
+        public void dispose(){
+            try{
+                recepcion = null;
+                vacc = null;
+                salir = null;
+                obser = null;
+                s = null;
+                try {
+                    this.stop();
+                    this.finalize();                    
+                } catch (Throwable ex) {
+                    java.util.logging.Logger.getLogger(Paciente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                System.gc();
+            }catch(Exception e){e.printStackTrace();}
+           
+        }
 
 	public Semaphore getSalir() {
 		return salir;

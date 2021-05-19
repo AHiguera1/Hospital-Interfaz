@@ -1,5 +1,7 @@
 package hosp;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 public class Auxiliar1 extends Thread {
@@ -18,10 +20,21 @@ public class Auxiliar1 extends Thread {
 	
 	public void run() {
 		int cont = 0;
+                it.getjTextField3().setText("A1");
 		while(true) {
 			if(!recepcion.getCola().isEmpty()) {
 				Paciente p = recepcion.getCola().poll();
                                 it.getjTextField2().setText(p.toString());
+                                String str = "";
+                                ArrayList<Paciente> aux = new ArrayList<>();
+                                aux.addAll(recepcion.getCola());
+                            for (Paciente e : aux){                                
+                                str += e.toString();      
+                                str += " ";
+                                
+                            }
+                                           
+                            it.getjTextField1().setText(str);
 				if(checkCita()) {
 					try {
 						vc.getLibre().acquire();
@@ -40,11 +53,10 @@ public class Auxiliar1 extends Thread {
 					
 				}else {
 					
-					System.out.println("Paciente " + p.toString() + "ha acudido sin cita");
+					
 					Logger.log("Paciente " + p.toString() + " ha acudido sin cita");
 					String msg = "Paciente " + p.toString() + " ha salido del hospital";
-					p.stop();
-					System.out.println(msg);
+					p.dispose();
 					Logger.log(msg);
 				}
 				cont++;
@@ -67,7 +79,7 @@ public class Auxiliar1 extends Thread {
 	}
 	
 	public void printVacuna(Sanitario s) {
-		System.out.println("Paciente " + s.getP().toString() + " vacunado en el puesto " + Integer.toString(vc.getPuesto(s)) + " por " + s.toString());
+		
 		Logger.log("Paciente " + s.getP().toString() + " vacunado en el puesto " + Integer.toString(vc.getPuesto(s)) + " por " + s.toString());
 	}
 	

@@ -26,27 +26,29 @@ public class Hospital extends Thread{
         vacuna = new Semaphore(0);
         rnd = new Random();
         r = new Recepcion();
-        o = new Observacion();
-        v = new Vacunacion();
+        o = new Observacion(it);
+        v = new Vacunacion(it);
         aux1 = new Auxiliar1(v,r,it);
-        aux2 = new Auxiliar2(v,vacuna);
+        aux2 = new Auxiliar2(v,vacuna,it);
             
     }
         
         public void run(){
-		
+		v.start();
 		aux1.start();
 		aux2.start();
 		for(int i = 0; i < 10; i++) {
-			new Sanitario(i,v,vacuna,aux1,o,descanso).start();
+			new Sanitario(i,v,vacuna,aux1,o,descanso,it).start();
 		}
 		for(int i = 0; i < 50; i++) {
 			new Paciente(r,i,o).start();
 			try {
-				Thread.sleep(1000 + (long)(rnd.nextInt(2000)));
+                            //Por esto al pintar la cola de recepcion no pinta nadie, porque llegan con retardo
+				//Thread.sleep(1000 + (long)(rnd.nextInt(2000)));
+                                Thread.sleep(500);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}
 

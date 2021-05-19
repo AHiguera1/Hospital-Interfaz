@@ -7,7 +7,7 @@ public class Recepcion {
 
 	private Queue<Paciente> cola = new ConcurrentLinkedQueue<Paciente>();
 
-	public void entraCola(Paciente p) {
+        public void entraCola(Paciente p) {
 		cola.add(p);
 	}
 	public Queue<Paciente> getCola() {

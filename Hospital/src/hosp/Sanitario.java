@@ -15,10 +15,12 @@ public class Sanitario extends Thread{
 	private Semaphore vacunando = new Semaphore(0);
 	private Observacion obser;
 	List<Sanitario> descanso;
+        Interfaz it;
 
 	
-	public Sanitario(int id,Vacunacion vc,Semaphore vacuna,Auxiliar1 aux1,Observacion obser,ArrayList<Sanitario> descanso) {
+	public Sanitario(int id,Vacunacion vc,Semaphore vacuna,Auxiliar1 aux1,Observacion obser,ArrayList<Sanitario> descanso, Interfaz it) {
 		this.vc = vc;
+                this.it = it;
 		this.vacuna = vacuna;
 		this.aux1 = aux1;
 		this.obser = obser;
@@ -30,13 +32,16 @@ public class Sanitario extends Thread{
 		while(true) {
 			try {
 				descanso.add(this);
+                                it.getjTextField4().setText(descansando());
 				sleep(1000 + (long)(rnd.nextInt(2000)));
 				descanso.remove(this);
+                                it.getjTextField4().setText(descansando());
 				vc.getSan().add(this);
 				int cont = 0;
-				while(cont != 15) {	
+				while(cont < 15) {	
 					vacunando.acquire();
 					vacuna.acquire();
+                                        it.getjTextField11().setText(Integer.toString(vacuna.availablePermits()));
 					cont++;
 					sleep(3000 + (long)(rnd.nextInt(2000)));
 					vc.getLibre().release();
@@ -44,8 +49,8 @@ public class Sanitario extends Thread{
 					aux1.printVacuna(this);
 					p = null;
 				}
-				System.out.println("Sanitario" + this.toString() + " comienza su descanso");
-				Logger.log("Sanitario" + this.toString() + " comienza su descanso");
+				cont = 0;
+				Logger.log("Sanitario " + this.toString() + " comienza su descanso");
 				vc.getSan().remove(this);
 				sleep(5000 + (long)(rnd.nextInt(3000)));
 				obser.atender(this);
@@ -63,7 +68,14 @@ public class Sanitario extends Thread{
 	public String toString() {
 		return "S" + this.Sid;
 	}
-	
+	public synchronized String  descansando(){
+            String str = "";
+            for(int i = 0; i < descanso.size(); i++){
+                str += descanso.get(i).toString();
+                str += " ";
+            }
+            return str;
+        }
 
 	public Semaphore getVacunando() {
 		return vacunando;
