@@ -752,6 +752,7 @@ public class InterfazCliente extends javax.swing.JFrame {
                 try{
                    ir = (InterfazRMI) Naming.lookup("//127.0.0.1/ClientConnector");
                    while(true){
+                       
                    }
                     
                 }catch(Exception e){e.printStackTrace();}
