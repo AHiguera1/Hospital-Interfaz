@@ -29,89 +29,112 @@ public class PuestoContainer{
         }
     }
     
-    public PuestoContainer(boolean mode){
+    public PuestoContainer(Interfaz it, boolean mode){
+        this.it = it;
         if(mode) initialize10();
         else initialize20();
         this.mode = mode;
         
     }
+    
     public String puestoStatus(Puesto p){
         String str = "";
-        boolean a = p.getP() == null;
-        boolean b = p.getS() == null;
-            if(!a || !b){
-                str += p.getS().toString() + ", " + p.getP().toString();
-            }else if(a){
-                str += p.getS().toString();
+        if(p.isBlocked()) str = "{Cerrado}";
+        else{
+            boolean a = p.getP() == null;
+            boolean b = p.getS() == null;
+            if(a){
+                if(!b) str += p.getS().toString();            
             }else{
-                 str += p.getP().toString();
-            }
-            return str;      
-    
+                if(b) str += p.getP().toString();
+                else str += p.getS().toString() + ", " + p.getP().toString();
+            }     
+            
+        }
+        return str;
     }
     
     public void printContainer20(){
             for (int i = 0;i < 20; i++){
                 switch(i){
                     case 0:
-                        it.tf.get(17).setText(puestoStatus(container.get(i + 1)));                   
+                        it.tf.get(16).setText("");                   
+                        it.tf.get(16).setText(puestoStatus(container.get(i + 1)));                   
                         break;
                     case 1:
-                        it.tf.get(18).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(17).setText("");
+                        it.tf.get(17).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 2:
-                        it.tf.get(19).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(18).setText("");
+                        it.tf.get(18).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 3:
-                        it.tf.get(20).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(19).setText("");
+                        it.tf.get(19).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 4:
-                        it.tf.get(21).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(20).setText("");
+                        it.tf.get(20).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 5:
-                        it.tf.get(22).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(21).setText("");
+                        it.tf.get(21).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 6:
-                        it.tf.get(23).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(22).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 7:
-                        it.tf.get(24).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(23).setText("");
+                        it.tf.get(23).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 8:
-                        it.tf.get(25).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(24).setText("");
+                        it.tf.get(24).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 9:
-                        it.tf.get(26).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(25).setText("");
+                        it.tf.get(25).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 10:
-                        it.tf.get(28).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(27).setText("");
+                        it.tf.get(27).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 11:
-                        it.tf.get(29).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(28).setText("");
+                        it.tf.get(28).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 12:
-                        it.tf.get(30).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(29).setText("");
+                        it.tf.get(29).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 13:
-                        it.tf.get(31).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(30).setText("");
+                        it.tf.get(30).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 14:
-                        it.tf.get(32).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(31).setText("");
+                        it.tf.get(31).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 15:
-                        it.tf.get(33).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(32).setText("");
+                        it.tf.get(32).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 16:
-                        it.tf.get(34).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(33).setText("");
+                        it.tf.get(33).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 17:
-                        it.tf.get(35).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(34).setText("");
+                        it.tf.get(34).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 18:
-                        it.tf.get(36).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(35).setText("");
+                        it.tf.get(35).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 19:
-                        it.tf.get(27).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(26).setText("");
+                        it.tf.get(26).setText(puestoStatus(container.get(i + 1)));
                         break;
                 }
 
@@ -123,34 +146,44 @@ public class PuestoContainer{
             for (int i = 0;i < 10; i++){
                 switch(i){
                     case 0:
-                        it.tf.get(5).setText(puestoStatus(container.get(i + 1)));                   
+                        it.tf.get(4).setText("");                   
+                        it.tf.get(4).setText(puestoStatus(container.get(i + 1)));                   
                         break;
                     case 1:
-                        it.tf.get(6).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(5).setText("");
+                        it.tf.get(5).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 2:
-                        it.tf.get(7).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(6).setText("");
+                        it.tf.get(6).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 3:
-                        it.tf.get(8).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(7).setText("");
+                        it.tf.get(7).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 4:
-                        it.tf.get(9).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(8).setText("");
+                        it.tf.get(8).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 5:
-                        it.tf.get(12).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(11).setText("");
+                        it.tf.get(11).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 6:
-                        it.tf.get(13).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(12).setText("");
+                        it.tf.get(12).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 7:
-                        it.tf.get(14).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(13).setText("");
+                        it.tf.get(13).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 8:
-                        it.tf.get(15).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(14).setText("");
+                        it.tf.get(14).setText(puestoStatus(container.get(i + 1)));
                         break;
                     case 9:
-                        it.tf.get(16).setText(puestoStatus(container.get(i + 1)));
+                        it.tf.get(15).setText("");
+                        it.tf.get(15).setText(puestoStatus(container.get(i + 1)));
                         break;
                     
                 }
@@ -158,6 +191,12 @@ public class PuestoContainer{
             }
            
         }
+    
+    public void addS(int id,Sanitario s){
+        this.container.get(id).setS(s);
+        if(mode) printContainer10();
+        else printContainer20();
+    }
     
     public int add(Sanitario s){
         ArrayList<Puesto> aux = new ArrayList<>(container.values());
@@ -185,7 +224,7 @@ public class PuestoContainer{
         ArrayList<Puesto> aux = new ArrayList<>(container.values());
         if(mode){
             for(Puesto p : aux){
-                if(p.getP() == null){
+                if(p.getP() == null && p.getS() != null){
                     p.setP(pa);
                     printContainer10();
                     return p.getId();
@@ -208,6 +247,7 @@ public class PuestoContainer{
         if(mode){
             for(Puesto p : aux){
                 if(p.getS() == s){
+                    p.setBlocked(false);
                     p.setS(null);
                     printContainer10();
                     return;
@@ -248,8 +288,11 @@ public class PuestoContainer{
     public Puesto get(int id){
         return this.container.get(id);
     }
+    
     public void blockPuesto(int id){
         this.container.get(id).setBlocked(true);
+        this.container.get(id).setS(null);
+        this.container.get(id).setP(null);
     }
     
     public int getPuesto(Sanitario s){

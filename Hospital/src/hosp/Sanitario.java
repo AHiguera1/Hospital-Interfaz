@@ -4,18 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
 
 public class Sanitario extends Thread{
 	private int Sid;
 	private Random rnd = new  Random();
 	private Vacunacion vc;
-	private Paciente p;
 	private Auxiliar1 aux1;
 	private Semaphore vacuna;
 	private Semaphore vacunando = new Semaphore(0);
 	private Observacion obser;
-	List<Sanitario> descanso;
-        Interfaz it;
+	private List<Sanitario> descanso;
+        private Interfaz it;
+        private int cont = 0;
 
 	
 	public Sanitario(int id,Vacunacion vc,Semaphore vacuna,Auxiliar1 aux1,Observacion obser,ArrayList<Sanitario> descanso, Interfaz it) {
@@ -29,41 +30,46 @@ public class Sanitario extends Thread{
 	}
 	
 	public void run() {
-		while(true) {
-			try {
-				descanso.add(this);
-                                it.getjTextField4().setText(descansando());
-				sleep(1000 + (long)(rnd.nextInt(2000)));
-				descanso.remove(this);
-                                it.getjTextField4().setText(descansando());
-				vc.getSan().add(this);
-				int cont = 0;
-				while(cont < 15) {	
-					vacunando.acquire(); //Espera a que llegue el paciente al puesto
-					vacuna.acquire();
-                                        it.getjTextField11().setText(Integer.toString(vacuna.availablePermits()));
-					cont++;
-					sleep(3000 + (long)(rnd.nextInt(2000)));
-					vc.getLibre().release();
-					p.getVacc().release();
-					aux1.printVacuna(this);
-					p = null;
-				}
-				cont = 0;
-				Logger.log("Sanitario " + this.toString() + " comienza su descanso");
-				vc.getSan().remove(this);
-				sleep(5000 + (long)(rnd.nextInt(3000)));
-				obser.atender(this);
-				
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();	
-			}
-		}
-		
-		
-		
-	}
+            try {
+                descanso.add(this);
+                it.getjTextField4().setText(descansando());
+                sleep(1000 + (long)(rnd.nextInt(2000)));
+                descanso.remove(this);
+                it.getjTextField4().setText(descansando());
+                while(true) {
+                    try {                       
+                        vc.getContainer().add(this);
+                        while(cont < 15) {
+                            vacunando.acquire(); //Espera a que llegue el paciente al puesto
+                            vacuna.acquire();
+                            it.getjTextField11().setText(Integer.toString(vacuna.availablePermits()));
+                            cont++;
+                            sleep(3000 + (long)(rnd.nextInt(2000)));
+                            vc.getLibre().release();
+                            int a = vc.getContainer().getPuesto(this);
+                            vc.getContainer().get(a).getP().getVacc().release();
+                            aux1.printVacuna(this);
+                            vc.getContainer().remove(vc.getContainer().get(a).getP());
+                        }
+                        cont = 0;
+                        Logger.log("Sanitario " + this.toString() + " comienza su descanso");
+                        vc.getContainer().remove(this);
+                        it.getjTextField4().setText(descansando());
+                        //END vacunacion
+//================================================================================================================================
+                    sleep(5000 + (long)(rnd.nextInt(3000)));
+                    obser.atender(this);
+
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            } catch (InterruptedException ex) {
+                java.util.logging.Logger.getLogger(Sanitario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
 	@Override
 	public String toString() {
 		return "S" + this.Sid;
@@ -77,6 +83,46 @@ public class Sanitario extends Thread{
             return str;
         }
 
+    public Auxiliar1 getAux1() {
+        return aux1;
+    }
+
+    public void setAux1(Auxiliar1 aux1) {
+        this.aux1 = aux1;
+    }
+
+    public Observacion getObser() {
+        return obser;
+    }
+
+    public void setObser(Observacion obser) {
+        this.obser = obser;
+    }
+
+    public List<Sanitario> getDescanso() {
+        return descanso;
+    }
+
+    public void setDescanso(List<Sanitario> descanso) {
+        this.descanso = descanso;
+    }
+
+    public Interfaz getIt() {
+        return it;
+    }
+
+    public void setIt(Interfaz it) {
+        this.it = it;
+    }
+
+    public int getCont() {
+        return cont;
+    }
+
+    public void setCont(int cont) {
+        this.cont = cont;
+    }
+        
 	public Semaphore getVacunando() {
 		return vacunando;
 	}
@@ -107,14 +153,6 @@ public class Sanitario extends Thread{
 
 	public void setVc(Vacunacion vc) {
 		this.vc = vc;
-	}
-
-	public Paciente getP() {
-		return p;
-	}
-
-	public void setP(Paciente p) {
-		this.p = p;
 	}
 
 	public Semaphore getVacuna() {

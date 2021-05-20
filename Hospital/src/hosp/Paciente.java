@@ -9,7 +9,6 @@ public class Paciente extends Thread{
 	private Semaphore vacc = new Semaphore(0);
 	private Semaphore salir = new Semaphore(0);
 	private Observacion obser;
-	private Sanitario s = null;
 	
 	public Paciente(Recepcion recepcion, int id,Observacion obser) {
 		this.recepcion = recepcion;
@@ -26,10 +25,8 @@ public class Paciente extends Thread{
 		this.recepcion.entraCola(this);
 		try {
 			vacc.acquire();
-			if(obser.observar(this)) {
-				salir.acquire();
-			}
-                        obser.removeP(this);
+			if(obser.observar(this)) salir.acquire();
+                        else obser.getContainer().remove(this);
 			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -44,7 +41,6 @@ public class Paciente extends Thread{
                 vacc = null;
                 salir = null;
                 obser = null;
-                s = null;
                 try {
                     this.stop();
                     this.finalize();                    
@@ -96,13 +92,6 @@ public class Paciente extends Thread{
 		this.vacc = vacc;
 	}
 
-	public Sanitario getS() {
-		return s;
-	}
-
-	public void setS(Sanitario s) {
-		this.s = s;
-	}
 	
 }
 
