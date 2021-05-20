@@ -8,8 +8,8 @@ public class Auxiliar1 extends Thread {
 	private Random rnd = new Random();
 	private Vacunacion vc;
 	private Recepcion recepcion;
-	private int id = 1;
         private Interfaz it;
+        private Paciente p;
 	
 	public Auxiliar1(Vacunacion vc, Recepcion recepcion, Interfaz it) {
 		this.vc = vc;
@@ -23,7 +23,7 @@ public class Auxiliar1 extends Thread {
                 it.getjTextField3().setText("A1");
 		while(true) {
 			if(!recepcion.getCola().isEmpty()) {
-                            Paciente p = recepcion.getCola().poll();
+                            p = recepcion.getCola().poll();
                             it.getjTextField2().setText(p.toString());
                             String str = "";
                             ArrayList<Paciente> aux = new ArrayList<>();
@@ -37,6 +37,9 @@ public class Auxiliar1 extends Thread {
                                     try {
                                         vc.getLibre().acquire();
                                         int a = vc.getContainer().add(p);
+                                        while(a == -1) a = vc.getContainer().add(p);
+                                        boolean b = vc.getContainer().get(a).getS() == null;
+                                        while(b) b = vc.getContainer().get(a).getS() == null;
                                         vc.getContainer().get(a).getS().getVacunando().release(); //Empieza a vacunar
                                     }catch (InterruptedException e) {
                                         e.printStackTrace();
@@ -65,7 +68,7 @@ public class Auxiliar1 extends Thread {
 	
 	public void printVacuna(Sanitario s) {
 		
-		Logger.log("Paciente " + s.getP().toString() + " vacunado en el puesto " + Integer.toString(vc.getContainer().getPuesto(s)) + " por " + s.toString());
+		Logger.log("Paciente " + vc.getContainer().get(vc.getContainer().getPuesto(s)).getP().toString() + " vacunado en el puesto " + Integer.toString(vc.getContainer().getPuesto(s)) + " por " + s.toString());
 	}
 	
 	
@@ -82,10 +85,6 @@ public class Auxiliar1 extends Thread {
 		}else {return false;}
 	}
 	
-	@Override
-	public String toString() {
-		return "A" + this.id;
-	}
 	
 	public Random getRnd() {
 		return rnd;
@@ -94,6 +93,41 @@ public class Auxiliar1 extends Thread {
 	public void setRnd(Random rnd) {
 		this.rnd = rnd;
 	}
+
+    public Vacunacion getVc() {
+        return vc;
+    }
+
+    public void setVc(Vacunacion vc) {
+        this.vc = vc;
+    }
+
+    public Recepcion getRecepcion() {
+        return recepcion;
+    }
+
+    public void setRecepcion(Recepcion recepcion) {
+        this.recepcion = recepcion;
+    }
+
+
+
+    public Interfaz getIt() {
+        return it;
+    }
+
+    public void setIt(Interfaz it) {
+        this.it = it;
+    }
+
+    public Paciente getP() {
+        return p;
+    }
+
+    public void setP(Paciente p) {
+        this.p = p;
+    }
+        
         
         
 }

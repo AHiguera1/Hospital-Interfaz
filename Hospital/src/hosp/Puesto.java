@@ -10,10 +10,11 @@ package hosp;
  * @author jorge
  */
 public class Puesto {
-            int id;
-            Paciente p = null;
-            Sanitario s = null;
-            boolean blocked = false;
+    int id;
+    Paciente p = null;
+    Sanitario s = null;
+    boolean blocked = false;
+
             
     public Puesto(int id){this.id = id;}
 

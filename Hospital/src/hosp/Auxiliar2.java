@@ -9,8 +9,6 @@ public class Auxiliar2 extends Thread{
 	private Semaphore vacuna;
         private Interfaz it;
 	
-	private int id = 2;
-	
 	public Auxiliar2(Vacunacion vc, Semaphore vacuna,Interfaz it) {
 		this.vc = vc;
 		this.vacuna = vacuna;
@@ -42,11 +40,7 @@ public class Auxiliar2 extends Thread{
 	}
 	
 	
-	
-	@Override
-	public String toString() {
-		return "A" + this.id;
-	}
+
 	
 	public Random getRnd() {
 		return rnd;
@@ -55,5 +49,29 @@ public class Auxiliar2 extends Thread{
 	public void setRnd(Random rnd) {
 		this.rnd = rnd;
 	}
+
+    public Vacunacion getVc() {
+        return vc;
+    }
+
+    public void setVc(Vacunacion vc) {
+        this.vc = vc;
+    }
+
+    public Semaphore getVacuna() {
+        return vacuna;
+    }
+
+    public void setVacuna(Semaphore vacuna) {
+        this.vacuna = vacuna;
+    }
+
+    public Interfaz getIt() {
+        return it;
+    }
+
+    public void setIt(Interfaz it) {
+        this.it = it;
+    }
 }
 

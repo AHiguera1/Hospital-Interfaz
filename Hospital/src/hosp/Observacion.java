@@ -12,7 +12,7 @@ public class Observacion extends Thread{
         //Pacientes no puede ser un ArrayList, pq entonces hay q añadirle puestos
         //tiene q ser un array estatico Puesto[20], y que los accesos sean siempre a 
         //una posicion concreta, mira los metodos addP() y removeP()
-	private Puesto[] pacientes = new Puesto[20];
+	private PuestoContainer container;
 	List<Paciente> reaccion = Collections.synchronizedList(new ArrayList<>());
 	Semaphore lleno = new Semaphore(20,true);
         private Interfaz it;
@@ -20,51 +20,19 @@ public class Observacion extends Thread{
         
         public Observacion(Interfaz it){
             this.it = it;
-            for(int i = 0; i < 20;i++){
-                pacientes[i] = new Puesto();
-            }
+            this.container = new PuestoContainer(it,false);
+            
         }
-        
-        public String puesto(Puesto p){
-            if(p.getP() != null){ 
-                if(p.getP().getS() == null){
-                return p.getP().toString();
-            }else{
-                return p.getP().toString() + ", " + p.getP().getS().toString();
-            }
-        }   
-            return "";
-    }
-        
-    public boolean addP(Paciente p){
-        
-        for(Puesto a : pacientes){
-            if(a.getP() == null){
-                a.setP(p);
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    public void removeP(Paciente p){
-        for(Puesto a : pacientes){
-            if(a.getP() == p){
-                a.setP(null);
-            }
-        }
-        
-    }
-    
-       
-	public boolean observar(Paciente p) {
+        public boolean observar(Paciente p) {
 		try {
-			lleno.acquire();
+			lleno.acquire(); //Semaforo para control de acceso maximo
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		while(!addP(p)){}
+                int a = this.container.add(p);
+                while(a == -1) a = this.container.add(p);
+
 		try {
 			Thread.sleep(10000);
                         
@@ -72,7 +40,7 @@ public class Observacion extends Thread{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int a = rnd.nextInt(20);
+		a = rnd.nextInt(20);
 		if(a > 0) {	
                         lleno.release();
 			return false;                        
@@ -86,92 +54,35 @@ public class Observacion extends Thread{
 	public boolean atender(Sanitario s) {
 		if(!reaccion.isEmpty()) {
 			Paciente p = reaccion.get(0);
-			p.setS(s);
-                        for (int i = 0;i < 20; i++){
-                switch(i){
-                    case 0:
-                        it.getjTextField17().setText(puesto(pacientes[i]));                   
-                        break;
-                    case 1:
-                        it.getjTextField18().setText(puesto(pacientes[i]));
-                        break;
-                    case 2:
-                        it.getjTextField19().setText(puesto(pacientes[i]));
-                        break;
-                    case 3:
-                        it.getjTextField20().setText(puesto(pacientes[i]));
-                        break;
-                    case 4:
-                        it.getjTextField21().setText(puesto(pacientes[i]));
-                        break;
-                    case 5:
-                        it.getjTextField22().setText(puesto(pacientes[i]));
-                        break;
-                    case 6:
-                        it.getjTextField23().setText(puesto(pacientes[i]));
-                        break;
-                    case 7:
-                        it.getjTextField24().setText(puesto(pacientes[i]));
-                        break;
-                    case 8:
-                        it.getjTextField25().setText(puesto(pacientes[i]));
-                        break;
-                    case 9:
-                        it.getjTextField26().setText(puesto(pacientes[i]));
-                        break;
-                    case 10:
-                        it.getjTextField28().setText(puesto(pacientes[i]));
-                        break;
-                    case 11:
-                        it.getjTextField29().setText(puesto(pacientes[i]));
-                        break;
-                    case 12:
-                        it.getjTextField30().setText(puesto(pacientes[i]));
-                        break;
-                    case 13:
-                        it.getjTextField31().setText(puesto(pacientes[i]));
-                        break;
-                    case 14:
-                        it.getjTextField32().setText(puesto(pacientes[i]));
-                        break;
-                    case 15:
-                        it.getjTextField33().setText(puesto(pacientes[i]));
-                        break;
-                    case 16:
-                        it.getjTextField34().setText(puesto(pacientes[i]));
-                        break;
-                    case 17:
-                        it.getjTextField35().setText(puesto(pacientes[i]));
-                        break;
-                    case 18:
-                        it.getjTextField36().setText(puesto(pacientes[i]));
-                        break;
-                    case 19:
-                        it.getjTextField27().setText(puesto(pacientes[i]));
-                        break;
-                }
-
-            }
-                                   
+                        int a = container.getPuesto(p);
+                        while(a == -1) a = container.getPuesto(p);
+                        container.addS(a,s);                            
 			p.getSalir().release();
-			reaccion.remove(0);
-			
-			try {
-                      
-                                Logger.log("Paciente " + p.toString() + " sufre una reaccion y es atendido por " + s.toString());
-				Thread.sleep(2000 + (long)(rnd.nextInt(3000))); 
+			reaccion.remove(0);			
+			try {                               
+                            Thread.sleep(2000 + (long)(rnd.nextInt(3000)));
+                            Logger.log("Paciente " + p.toString() + " sufre una reaccion y es atendido por " + s.toString());
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+                            e.printStackTrace();
 			}
-			removeP(p);
+                        container.remove(s);
+			container.remove(p);                        
 			lleno.release();
 			return true;
 		}
                 return false;
 	}
+
+    public PuestoContainer getContainer() {
+        return container;
+    }
+
+    public void setContainer(PuestoContainer container) {
+        this.container = container;
+    }
         
-        public Random getRnd() {
+       
+    public Random getRnd() {
         return rnd;
     }
 
