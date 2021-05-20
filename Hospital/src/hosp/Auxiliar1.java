@@ -23,49 +23,34 @@ public class Auxiliar1 extends Thread {
                 it.getjTextField3().setText("A1");
 		while(true) {
 			if(!recepcion.getCola().isEmpty()) {
-				Paciente p = recepcion.getCola().poll();
-                                it.getjTextField2().setText(p.toString());
-                                String str = "";
-                                ArrayList<Paciente> aux = new ArrayList<>();
-                                aux.addAll(recepcion.getCola());
+                            Paciente p = recepcion.getCola().poll();
+                            it.getjTextField2().setText(p.toString());
+                            String str = "";
+                            ArrayList<Paciente> aux = new ArrayList<>();
+                            aux.addAll(recepcion.getCola());
                             for (Paciente e : aux){                                
                                 str += e.toString();      
                                 str += " ";
-                                
-                            }
-                                           
+                            }                                       
                             it.getjTextField1().setText(str);
 				if(checkCita()) {
-					try {
-						vc.getLibre().acquire();
-						int next = vc.nextPuesto();
-						while(next == -1) { next = vc.nextPuesto();}
-						vc.getPuesto(next).setP(p);
-						vc.getPuesto(next).getVacunando().release();
-						
-						
-					} catch (InterruptedException e) {
-						
-						e.printStackTrace();
-					}
-					
-					
-					
-				}else {
-					
-					
-					Logger.log("Paciente " + p.toString() + " ha acudido sin cita");
-					String msg = "Paciente " + p.toString() + " ha salido del hospital";
-					p.dispose();
-					Logger.log(msg);
+                                    try {
+                                        vc.getLibre().acquire();
+                                        int a = vc.getContainer().add(p);
+                                        vc.getContainer().get(a).getS().getVacunando().release(); //Empieza a vacunar
+                                    }catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+				}else{
+                                    Logger.log("Paciente " + p.toString() + " ha acudido sin cita");
+                                    String msg = "Paciente " + p.toString() + " ha salido del hospital";
+                                    p.dispose();
+                                    Logger.log(msg);
 				}
 				cont++;
-                                //System.out.println("A1 " + cont);
-			
 			}
 			if(cont == 10) {
-                            cont = 0;
-               
+                            cont = 0;               
                             Logger.log("Auxiliar A1 comienza su descanso");
                             it.getjTextField2().setText("(Descanso)");
                             try {
@@ -80,7 +65,7 @@ public class Auxiliar1 extends Thread {
 	
 	public void printVacuna(Sanitario s) {
 		
-		Logger.log("Paciente " + s.getP().toString() + " vacunado en el puesto " + Integer.toString(vc.getPuesto(s)) + " por " + s.toString());
+		Logger.log("Paciente " + s.getP().toString() + " vacunado en el puesto " + Integer.toString(vc.getContainer().getPuesto(s)) + " por " + s.toString());
 	}
 	
 	

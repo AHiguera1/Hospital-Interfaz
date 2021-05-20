@@ -1,4 +1,4 @@
-package hosp;
+	package hosp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class Sanitario extends Thread{
 				vc.getSan().add(this);
 				int cont = 0;
 				while(cont < 15) {	
-					vacunando.acquire();
+					vacunando.acquire(); //Espera a que llegue el paciente al puesto
 					vacuna.acquire();
                                         it.getjTextField11().setText(Integer.toString(vacuna.availablePermits()));
 					cont++;
