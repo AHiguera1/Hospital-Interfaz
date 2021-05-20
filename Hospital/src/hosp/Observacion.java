@@ -19,6 +19,7 @@ public class Observacion extends Thread{
         
         public class Puesto{
             Paciente p = null;
+            boolean blocked;
             public Puesto(){
                 
             }
@@ -27,7 +28,7 @@ public class Observacion extends Thread{
                 return this.p;
             }
             public void setP(Paciente p){
-                this.p = p;
+                
             }
         }
         public Observacion(Interfaz it){
@@ -44,9 +45,10 @@ public class Observacion extends Thread{
             }else{
                 return p.getP().toString() + ", " + p.getP().getS().toString();
             }
-        }
-            return "\t";
+        }   
+            return "";
     }
+        
         @Override
         public void run(){
         while(true){
@@ -54,7 +56,7 @@ public class Observacion extends Thread{
             for (int i = 0;i < 20; i++){
                 switch(i){
                     case 0:
-                        it.getjTextField17().setText(puesto(pacientes[i]));
+                        it.tf.get(17).setText(puesto(pacientes[i]));
                    
                         break;
                     case 1:
@@ -117,11 +119,7 @@ public class Observacion extends Thread{
                 }
 
             }
-            try {
-                sleep(1000);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
+           
         }
 
     }
@@ -156,13 +154,15 @@ public class Observacion extends Thread{
 		while(!addP(p)){}
 		try {
 			Thread.sleep(10000);
+                        
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		int a = rnd.nextInt(20);
 		if(a > 0) {	
-			return false;
+                        lleno.release();
+			return false;                        
 		}else {
 			reaccion.add(p);
 			return true;
@@ -174,11 +174,79 @@ public class Observacion extends Thread{
 		if(!reaccion.isEmpty()) {
 			Paciente p = reaccion.get(0);
 			p.setS(s);
+                        for (int i = 0;i < 20; i++){
+                switch(i){
+                    case 0:
+                        it.getjTextField17().setText(puesto(pacientes[i]));                   
+                        break;
+                    case 1:
+                        it.getjTextField18().setText(puesto(pacientes[i]));
+                        break;
+                    case 2:
+                        it.getjTextField19().setText(puesto(pacientes[i]));
+                        break;
+                    case 3:
+                        it.getjTextField20().setText(puesto(pacientes[i]));
+                        break;
+                    case 4:
+                        it.getjTextField21().setText(puesto(pacientes[i]));
+                        break;
+                    case 5:
+                        it.getjTextField22().setText(puesto(pacientes[i]));
+                        break;
+                    case 6:
+                        it.getjTextField23().setText(puesto(pacientes[i]));
+                        break;
+                    case 7:
+                        it.getjTextField24().setText(puesto(pacientes[i]));
+                        break;
+                    case 8:
+                        it.getjTextField25().setText(puesto(pacientes[i]));
+                        break;
+                    case 9:
+                        it.getjTextField26().setText(puesto(pacientes[i]));
+                        break;
+                    case 10:
+                        it.getjTextField28().setText(puesto(pacientes[i]));
+                        break;
+                    case 11:
+                        it.getjTextField29().setText(puesto(pacientes[i]));
+                        break;
+                    case 12:
+                        it.getjTextField30().setText(puesto(pacientes[i]));
+                        break;
+                    case 13:
+                        it.getjTextField31().setText(puesto(pacientes[i]));
+                        break;
+                    case 14:
+                        it.getjTextField32().setText(puesto(pacientes[i]));
+                        break;
+                    case 15:
+                        it.getjTextField33().setText(puesto(pacientes[i]));
+                        break;
+                    case 16:
+                        it.getjTextField34().setText(puesto(pacientes[i]));
+                        break;
+                    case 17:
+                        it.getjTextField35().setText(puesto(pacientes[i]));
+                        break;
+                    case 18:
+                        it.getjTextField36().setText(puesto(pacientes[i]));
+                        break;
+                    case 19:
+                        it.getjTextField27().setText(puesto(pacientes[i]));
+                        break;
+                }
+
+            }
+                                   
 			p.getSalir().release();
 			reaccion.remove(0);
 			
-			try {Logger.log("Paciente " + p.toString() + " sufre una reaccion y es atendido por " + s.toString());
-				Thread.sleep(2000 + (long)(rnd.nextInt(3000)));
+			try {
+                      
+                                Logger.log("Paciente " + p.toString() + " sufre una reaccion y es atendido por " + s.toString());
+				Thread.sleep(2000 + (long)(rnd.nextInt(3000))); 
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

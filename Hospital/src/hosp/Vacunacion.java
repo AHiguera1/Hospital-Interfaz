@@ -62,11 +62,7 @@ public class Vacunacion extends Thread {
                 }
 
             }
-            try {
-                sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Vacunacion.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
         }
 
     }

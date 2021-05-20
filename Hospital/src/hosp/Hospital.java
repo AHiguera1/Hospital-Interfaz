@@ -38,10 +38,10 @@ public class Hospital extends Thread{
                 o.start();
 		aux1.start();
 		aux2.start();
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 3; i++) {
 			new Sanitario(i,v,vacuna,aux1,o,descanso,it).start();
 		}
-		for(int i = 0; i < 50; i++) {
+		for(int i = 0; i < 2000; i++) {
 			new Paciente(r,i,o).start();
 			try {
                             //Por esto al pintar la cola de recepcion no pinta nadie, porque llegan con retardo
