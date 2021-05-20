@@ -10,28 +10,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-<<<<<<< HEAD
+
 import java.rmi.*;
 import java.rmi.registry.*;
 import java.net.*;
-=======
->>>>>>> 50b5513296316310fc3532033a9fffb2aa1aa94d
+
 
 /**
  *
  * @author Andrés
  */
 public class InterfazCliente extends javax.swing.JFrame {
-<<<<<<< HEAD
-    private static InterfazRMI ir;
-    
-=======
 
-    /**
-     * Creates new form Interfaz
-     */
->>>>>>> 50b5513296316310fc3532033a9fffb2aa1aa94d
-   
+    private static InterfazRMI ir;  
     ArrayList<javax.swing.JTextField> tf = new ArrayList<>();
     
     public InterfazCliente() {
@@ -757,15 +748,14 @@ public class InterfazCliente extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new InterfazCliente().setVisible(true);
-<<<<<<< HEAD
+
                 try{
                    ir = (InterfazRMI) Naming.lookup("//127.0.0.1/ClientConnector");
                    while(true){
                    }
                     
                 }catch(Exception e){e.printStackTrace();}
-=======
->>>>>>> 50b5513296316310fc3532033a9fffb2aa1aa94d
+
                 
             }
         });
