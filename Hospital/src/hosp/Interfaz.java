@@ -21,6 +21,7 @@ public class Interfaz extends javax.swing.JFrame {
      * Creates new form Interfaz
      */
     private Hospital h;
+    private Server sv;
     ArrayList<javax.swing.JTextField> tf = new ArrayList<>();
     
     public Interfaz() {
@@ -68,6 +69,8 @@ public class Interfaz extends javax.swing.JFrame {
   
         h = new Hospital(this);
         h.start();
+        sv = new Server(h);
+        sv.start();
     }
 
     /**

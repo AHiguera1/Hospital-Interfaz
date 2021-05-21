@@ -23,7 +23,7 @@ import java.net.*;
 public class InterfazCliente extends javax.swing.JFrame {
 
     private static InterfazRMI ir;  
-    ArrayList<javax.swing.JTextField> tf = new ArrayList<>();
+    static ArrayList<javax.swing.JTextField> tf = new ArrayList<>();
     
     public InterfazCliente() {
         initComponents();
@@ -750,10 +750,15 @@ public class InterfazCliente extends javax.swing.JFrame {
                 new InterfazCliente().setVisible(true);
 
                 try{
-                   ir = (InterfazRMI) Naming.lookup("//127.0.0.1/ClientConnector");
-                   while(true){
+                    ir = (InterfazRMI) Naming.lookup("//127.0.0.1/ClientConnector");
+                    while(true){
+                        try{
+                            Thread.sleep(1000);   
+                        }catch(Exception e){}
                        
-                   }
+                        JTextField tx0 = (JTextField) tf.toArray()[0];
+                        tx0.setText(ir.getCola().toString());
+                    }
                     
                 }catch(Exception e){e.printStackTrace();}
 
