@@ -6,6 +6,7 @@
 package hosp;
 
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -29,16 +30,16 @@ public class ClientConnector implements Runnable {
     public void run() {
         ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
         if (((int) ois.readObject()) == 1) {
-            ArryList<String> obj = new ArrayList();
+            ArrayList<String> obj = new ArrayList();
         String str = "";
         h.getR().getCola().forEach(p -> {
             str += p.toString() + " ";
         });
         obj.add(str);
         str = "";
-        obj.add(h.getAux1().getp().toString());
+        obj.add(h.getAux1().getP().toString());
         obj.add("A1");
-        h.getDescanso().gforEach(s -> {
+        h.getDescanso().forEach(s -> {
             str += s.toString() + " ";
         });
         obj.add(str);
