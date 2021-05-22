@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package client;
+package hosp;
 
 import java.util.ArrayList;
 import javax.swing.JLabel;
@@ -12,15 +12,16 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 import java.rmi.*;
-import java.rmi.registry.*;
 import java.net.*;
+import hosp.InterfazRMI;
+import java.io.Serializable;
 
 
 /**
  *
  * @author Andrés
  */
-public class InterfazCliente extends javax.swing.JFrame {
+public class InterfazCliente extends javax.swing.JFrame implements Serializable {
 
     private static InterfazRMI ir;  
     static ArrayList<javax.swing.JTextField> tf = new ArrayList<>();
@@ -751,14 +752,18 @@ public class InterfazCliente extends javax.swing.JFrame {
 
                 try{
                     ir = (InterfazRMI) Naming.lookup("//127.0.0.1/ClientConnector");
-                    while(true){
-                        try{
-                            Thread.sleep(1000);   
-                        }catch(Exception e){}
+                    System.out.println(Naming.lookup("//127.0.0.1/ClientConnector").getClass().toString());
+                    System.out.println(ir.getClass().toString());
+                    
+                    System.out.println(ir.getO());
+                    //while(true){
+                        //try{
+                            //Thread.sleep(1000);   
+                       // }catch(Exception e){}
                        
-                        JTextField tx0 = (JTextField) tf.toArray()[0];
-                        tx0.setText(ir.getCola().toString());
-                    }
+                      //  JTextField tx0 = (JTextField) tf.toArray()[0];
+                       // ir.getCola();
+                   // }
                     
                 }catch(Exception e){e.printStackTrace();}
 

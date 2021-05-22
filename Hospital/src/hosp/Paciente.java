@@ -1,9 +1,10 @@
 package hosp;
 
+import java.io.Serializable;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 
-public class Paciente extends Thread{
+public class Paciente extends Thread implements Serializable{
 	private int Pid;
 	private Recepcion recepcion;
 	private Semaphore vacc = new Semaphore(0);

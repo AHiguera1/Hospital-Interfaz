@@ -1,5 +1,6 @@
 package hosp;
 
+import java.io.Serializable;
 import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 
-public class Observacion extends Thread{
+public class Observacion extends Thread implements Serializable{
 	private Random rnd = new Random();
         //Pacientes no puede ser un ArrayList, pq entonces hay q añadirle puestos
         //tiene q ser un array estatico Puesto[20], y que los accesos sean siempre a 

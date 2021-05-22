@@ -1,5 +1,6 @@
 package hosp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
 
 
 
-public class Vacunacion{
+public class Vacunacion implements Serializable{
     private PuestoContainer container;
     private Semaphore libre = new Semaphore(10,true);
     private Interfaz it;

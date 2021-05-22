@@ -5,11 +5,13 @@
  */
 package hosp;
 
+import java.io.Serializable;
+
 /**
  *
  * @author jorge
  */
-public class Puesto {
+public class Puesto implements Serializable {
     int id;
     Paciente p = null;
     Sanitario s = null;

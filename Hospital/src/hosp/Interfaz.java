@@ -5,6 +5,7 @@
  */
 package hosp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,7 +16,7 @@ import javax.swing.JTextField;
  *
  * @author Andrés
  */
-public class Interfaz extends javax.swing.JFrame {
+public class Interfaz extends javax.swing.JFrame implements Serializable{
 
     /**
      * Creates new form Interfaz
@@ -69,8 +70,7 @@ public class Interfaz extends javax.swing.JFrame {
   
         h = new Hospital(this);
         h.start();
-        sv = new Server(h);
-        sv.start();
+
     }
 
     /**

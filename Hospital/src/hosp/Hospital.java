@@ -1,12 +1,13 @@
 package hosp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 
-public class Hospital extends Thread{
+public class Hospital extends Thread implements Serializable{
 
     private Interfaz it;
     private ArrayList<Sanitario> descanso;
@@ -17,7 +18,7 @@ public class Hospital extends Thread{
     private Vacunacion v;
     private Auxiliar1 aux1;
     private Auxiliar2 aux2;
-    private Server s = new Server(this);
+    private Server s;
 	
     public Hospital (Interfaz it)
     {
@@ -31,6 +32,7 @@ public class Hospital extends Thread{
         v = new Vacunacion(it,r);
         aux1 = new Auxiliar1(v,r,it);
         aux2 = new Auxiliar2(v,vacuna,it);
+        s = new Server(descanso,r,o,v,aux1,aux2);
         s.start();
             
     }

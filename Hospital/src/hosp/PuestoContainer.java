@@ -5,6 +5,7 @@
  */
 package hosp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -13,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author jorge
  */
-public class PuestoContainer{
+public class PuestoContainer implements Serializable{
     private Map<Integer,Puesto> container = new ConcurrentHashMap<>();
     private Interfaz it;
     private final boolean mode;
@@ -308,6 +309,23 @@ public class PuestoContainer{
             if(p.getP() == pa) return p.getId();
         }
         return -1;}
+
+    public Map<Integer, Puesto> getContainer() {
+        return container;
+    }
+
+    public void setContainer(Map<Integer, Puesto> container) {
+        this.container = container;
+    }
+
+    public Interfaz getIt() {
+        return it;
+    }
+
+    public void setIt(Interfaz it) {
+        this.it = it;
+    }
+    
 
 }
     

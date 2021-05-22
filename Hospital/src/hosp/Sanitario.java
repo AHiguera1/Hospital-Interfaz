@@ -1,12 +1,13 @@
 	package hosp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 
-public class Sanitario extends Thread{
+public class Sanitario extends Thread implements Serializable{
 	private int Sid;
 	private Random rnd = new  Random();
 	private Vacunacion vc;

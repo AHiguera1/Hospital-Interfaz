@@ -1,9 +1,10 @@
 package hosp;
 
+import java.io.Serializable;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 
-public class Auxiliar2 extends Thread{
+public class Auxiliar2 extends Thread implements Serializable{
 	private Random rnd = new Random();
 	private Vacunacion vc;
 	private Semaphore vacuna;

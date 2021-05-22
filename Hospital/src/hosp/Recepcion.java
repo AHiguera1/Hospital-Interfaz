@@ -1,9 +1,10 @@
 package hosp;
 
+import java.io.Serializable;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class Recepcion {
+public class Recepcion implements Serializable{
 
 	private Queue<Paciente> cola = new ConcurrentLinkedQueue<Paciente>();
 

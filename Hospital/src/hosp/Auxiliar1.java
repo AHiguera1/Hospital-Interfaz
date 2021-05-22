@@ -1,10 +1,11 @@
 package hosp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-public class Auxiliar1 extends Thread {
+public class Auxiliar1 extends Thread implements Serializable {
 	private Random rnd = new Random();
 	private Vacunacion vc;
 	private Recepcion recepcion;
