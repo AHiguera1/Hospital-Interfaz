@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 
-public class Hospital extends Thread implements Serializable{
+public class Hospital extends Thread implements Serializable {
 
     private Interfaz it;
     private ArrayList<Sanitario> descanso;
@@ -19,9 +19,8 @@ public class Hospital extends Thread implements Serializable{
     private Auxiliar1 aux1;
     private Auxiliar2 aux2;
     private Server s;
-	
-    public Hospital (Interfaz it)
-    {
+
+    public Hospital(Interfaz it) {
         Logger.createLogger();
         this.it = it;
         descanso = new ArrayList<Sanitario>();
@@ -29,34 +28,40 @@ public class Hospital extends Thread implements Serializable{
         rnd = new Random();
         r = new Recepcion();
         o = new Observacion(it);
-        v = new Vacunacion(it,r);
-        aux1 = new Auxiliar1(v,r,it);
-        aux2 = new Auxiliar2(v,vacuna,it);
-        s = new Server(descanso,r,o,v,aux1,aux2);
+        v = new Vacunacion(it, r);
+        aux1 = new Auxiliar1(v, r, it);
+        aux2 = new Auxiliar2(v, vacuna, it);
+        s = new Server(this);
         s.start();
-            
-    }
-        
-        public void run(){
-                o.start();
-		aux1.start();
-		aux2.start();
-		for(int i = 0; i < 10; i++) {
-			new Sanitario(i,v,vacuna,aux1,o,descanso,it).start();
-		}
-		for(int i = 0; i < 2000; i++) {
-			new Paciente(r,i,o).start();
-			try {
-                            //Por esto al pintar la cola de recepcion no pinta nadie, porque llegan con retardo
-				//Thread.sleep(1000 + (long)(rnd.nextInt(2000)));
-                                Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
-			}
-		}
 
-	}
+    }
+
+    public void run() {
+        o.start();
+        aux1.start();
+        aux2.start();
+        for (int i = 0; i < 10; i++) {
+
+            new Sanitario(i, v, vacuna, aux1, o, descanso, it).start();
+        }
+        for (int i = 0; i < 2000; i++) {
+
+            new Paciente(r, i, o).start();
+            try {
+                // Por esto al pintar la cola de recepcion no pinta nadie, porque llegan con
+                // retardo
+                // Thread.sleep(1000 + (long)(rnd.nextInt(2000)));
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+
+                e.printStackTrace();
+            }
+        }
+        /*
+         * while(true){ s = new Server(this); s.start(); System.out.println("hola"); }
+         */
+
+    }
 
     public Interfaz getIt() {
         return it;
@@ -129,7 +134,5 @@ public class Hospital extends Thread implements Serializable{
     public void setAux2(Auxiliar2 aux2) {
         this.aux2 = aux2;
     }
-        
-        
 
 }

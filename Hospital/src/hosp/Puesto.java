@@ -17,8 +17,9 @@ public class Puesto implements Serializable {
     Sanitario s = null;
     boolean blocked = false;
 
-            
-    public Puesto(int id){this.id = id;}
+    public Puesto(int id) {
+        this.id = id;
+    }
 
     public int getId() {
         return id;
@@ -27,14 +28,15 @@ public class Puesto implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-   
+
     public Paciente getP() {
-        
+
         return p;
     }
 
     public void setP(Paciente p) {
-        if(!blocked) this.p = p;
+        if (!blocked)
+            this.p = p;
     }
 
     public Sanitario getS() {
@@ -42,7 +44,8 @@ public class Puesto implements Serializable {
     }
 
     public void setS(Sanitario s) {
-        if(!blocked) this.s = s;
+        if (!blocked)
+            this.s = s;
     }
 
     public boolean isBlocked() {
@@ -52,7 +55,5 @@ public class Puesto implements Serializable {
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
     }
-            
-        }
-    
 
+}

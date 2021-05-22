@@ -4,44 +4,39 @@
  * and open the template in the editor.
  */
 package hosp;
+
 import java.io.Serializable;
 import java.rmi.*;
 import java.rmi.registry.*;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 /**
  *
  * @author jorge
  */
-public class Server extends Thread implements Serializable{
-    private ArrayList<Sanitario> descanso;
-    private Semaphore vacuna;
-    private Recepcion r;
-    private Observacion o;
-    private Vacunacion v;
-    private Auxiliar1 aux1;
-    private Auxiliar2 aux2;
-    public Server(ArrayList<Sanitario> descanso,Recepcion r,Observacion o,Vacunacion v,Auxiliar1 aux1,Auxiliar2 aux2 ){
-        this.descanso = descanso;
-        this.r = r;
-        this.o = o;
-        this.v = v;
-        this.aux1 = aux1;
-        this.aux2 = aux2;
-        
-       
+public class Server extends Thread implements Serializable {
+    private Hospital h;
+    private ServerSocket ss = new ServerSocket(7777);
+    ExecutorService es = Executors.newCachedThreadPool();
+
+    public Server(Hospital h) {
+        this.h = h;
+
     }
-    
-    public void run(){
-        try{
-            ClientConnector cc = new ClientConnector(descanso,vacuna,r,o,v,aux1);
-            System.out.println(o);
-            //Registry reg = LocateRegistry.createRegistry(2087);
-            Naming.rebind("//127.0.0.1/ClientConnector",cc);
-            System.out.println("RMI Object is online");
-        }catch(Exception e) {
+
+    public void run() {
+        try {
+            while (true) {
+                Socket s = ss.accept();
+                SocketController sc = new SocketController(h, s);
+                es.execute(sc);
+            }
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

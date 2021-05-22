@@ -4,54 +4,59 @@ import java.io.Serializable;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 
-public class Paciente extends Thread implements Serializable{
+public class Paciente extends Thread implements Serializable {
 	private int Pid;
 	private Recepcion recepcion;
 	private Semaphore vacc = new Semaphore(0);
 	private Semaphore salir = new Semaphore(0);
 	private Observacion obser;
-	
-	public Paciente(Recepcion recepcion, int id,Observacion obser) {
+
+	public Paciente(Recepcion recepcion, int id, Observacion obser) {
 		this.recepcion = recepcion;
 		this.Pid = id;
 		this.obser = obser;
- 	}
-	
+	}
+
 	@Override
 	public String toString() {
 		return "P" + this.Pid;
 	}
-	
-	public void run() {		
+
+	public void run() {
 		this.recepcion.entraCola(this);
 		try {
 			vacc.acquire();
-			if(obser.observar(this)) salir.acquire();
-                        else obser.getContainer().remove(this);
-			
+			if (obser.observar(this))
+				salir.acquire();
+			else
+				obser.getContainer().remove(this);
+
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		String msg = "Paciente " + this.toString() + " ha salido del hospital";
 		Logger.log(msg);
-		
+
 	}
-        public void dispose(){
-            try{
-                recepcion = null;
-                vacc = null;
-                salir = null;
-                obser = null;
-                try {
-                    this.stop();
-                    this.finalize();                    
-                } catch (Throwable ex) {
-                    java.util.logging.Logger.getLogger(Paciente.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                System.gc();
-            }catch(Exception e){e.printStackTrace();}
-           
-        }
+
+	public void dispose() {
+		try {
+			recepcion = null;
+			vacc = null;
+			salir = null;
+			obser = null;
+			try {
+				this.stop();
+				this.finalize();
+			} catch (Throwable ex) {
+				java.util.logging.Logger.getLogger(Paciente.class.getName()).log(Level.SEVERE, null, ex);
+			}
+			System.gc();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	public Semaphore getSalir() {
 		return salir;
@@ -93,6 +98,4 @@ public class Paciente extends Thread implements Serializable{
 		this.vacc = vacc;
 	}
 
-	
 }
-
