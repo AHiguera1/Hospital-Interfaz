@@ -63,6 +63,8 @@ public class InterfazCliente extends javax.swing.JFrame implements Serializable 
         tf.add(jTextField34);
         tf.add(jTextField35);
         tf.add(jTextField36);
+        System.out.println(tf.size());
+        System.out.println(tf);
         tf.forEach(j -> {
             j.setText("");
         });
@@ -520,43 +522,93 @@ public class InterfazCliente extends javax.swing.JFrame implements Serializable 
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
+        try{
+            Socket soc = new Socket("localhost", 7777);
+            ObjectOutputStream oos = new ObjectOutputStream(soc.getOutputStream());
+            oos.flush();
+            oos.writeObject(51);
+        }catch(Exception e){}
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
+        try{
+            Socket soc = new Socket("localhost", 7777);
+            ObjectOutputStream oos = new ObjectOutputStream(soc.getOutputStream());
+            oos.flush();
+            oos.writeObject(52);
+        }catch(Exception e){}
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
+        try{
+            Socket soc = new Socket("localhost", 7777);
+            ObjectOutputStream oos = new ObjectOutputStream(soc.getOutputStream());
+            oos.flush();
+            oos.writeObject(53);
+        }catch(Exception e){}
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        // TODO add your handling code here:
+        try{
+            Socket soc = new Socket("localhost", 7777);
+            ObjectOutputStream oos = new ObjectOutputStream(soc.getOutputStream());
+            oos.flush();
+            oos.writeObject(54);
+        }catch(Exception e){}
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        // TODO add your handling code here:
+        try{
+            Socket soc = new Socket("localhost", 7777);
+            ObjectOutputStream oos = new ObjectOutputStream(soc.getOutputStream());
+            oos.flush();
+            oos.writeObject(55);
+        }catch(Exception e){}
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        // TODO add your handling code here:
+        try{
+            Socket soc = new Socket("localhost", 7777);
+            ObjectOutputStream oos = new ObjectOutputStream(soc.getOutputStream());
+            oos.flush();
+            oos.writeObject(56);
+        }catch(Exception e){}
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        // TODO add your handling code here:
+        try{
+            Socket soc = new Socket("localhost", 7777);
+            ObjectOutputStream oos = new ObjectOutputStream(soc.getOutputStream());
+            oos.flush();
+            oos.writeObject(57);
+        }catch(Exception e){}
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        // TODO add your handling code here:
+        try{
+            Socket soc = new Socket("localhost", 7777);
+            ObjectOutputStream oos = new ObjectOutputStream(soc.getOutputStream());
+            oos.flush();
+            oos.writeObject(58);
+        }catch(Exception e){}
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        // TODO add your handling code here:
+        try{
+            Socket soc = new Socket("localhost", 7777);
+            ObjectOutputStream oos = new ObjectOutputStream(soc.getOutputStream());
+            oos.flush();
+            oos.writeObject(59);
+        }catch(Exception e){}
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        // TODO add your handling code here:
+        try{
+            Socket soc = new Socket("localhost", 7777);
+            ObjectOutputStream oos = new ObjectOutputStream(soc.getOutputStream());
+            oos.flush();
+            oos.writeObject(60);
+        }catch(Exception e){}
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
@@ -617,29 +669,35 @@ public class InterfazCliente extends javax.swing.JFrame implements Serializable 
             public void run() {
                 new InterfazCliente().setVisible(true);
 
-                try {
+                
+
+            }
+        });
+        
+        try {
 
                     
-                    while (true) {
+                    while(true) {
+                        
                         try {
                             Thread.sleep(1000);
                         } catch (Exception e) {
                         }
                         Socket s = new Socket("localhost", 7777);
+                        ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+                        oos.flush();
+                        oos.writeObject(1);
                         ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
                         ArrayList<String> obj = (ArrayList<String>) ois.readObject();
                         for (int i = 0; i < 36; i++) {
                             tf.get(i).setText(obj.get(i));
                         }
-
+                        
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-            }
-        });
     }
 
     public JLabel getjLabel1() {
@@ -714,21 +772,7 @@ public class InterfazCliente extends javax.swing.JFrame implements Serializable 
         this.jLabel17 = jLabel17;
     }
 
-    public JLabel getjLabel18() {
-        return jLabel18;
-    }
-
-    public void setjLabel18(JLabel jLabel18) {
-        this.jLabel18 = jLabel18;
-    }
-
-    public JLabel getjLabel19() {
-        return jLabel19;
-    }
-
-    public void setjLabel19(JLabel jLabel19) {
-        this.jLabel19 = jLabel19;
-    }
+   
 
     public JLabel getjLabel2() {
         return jLabel2;

@@ -72,7 +72,7 @@ public class Vacunacion implements Serializable{
                     
         }
         Sanitario s = container.get(id).getS();
-        s.setCont(15);
+        s.setCont(14);
         Paciente p = container.get(id).getP();
         container.remove(s);
         container.blockPuesto(id);

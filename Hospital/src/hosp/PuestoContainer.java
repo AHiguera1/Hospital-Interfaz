@@ -56,7 +56,7 @@ public class PuestoContainer implements Serializable {
         return aux;
     }
     public String puestoStatus(Puesto p) {
-        String str = "";
+        String str = " ";
         if (p.isBlocked())
             str = "{Cerrado}";
         else {
@@ -313,10 +313,11 @@ public class PuestoContainer implements Serializable {
         return this.container.get(id);
     }
 
-    public void blockPuesto(int id) {
+    public void blockPuesto(int id) throws InterruptedException {
         this.container.get(id).setBlocked(true);
         this.container.get(id).setS(null);
         this.container.get(id).setP(null);
+        Thread.sleep(3000);
     }
 
     public int getPuesto(Sanitario s) {

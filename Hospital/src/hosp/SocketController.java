@@ -31,7 +31,8 @@ public class SocketController implements Runnable {
     public void run() {
         try{
             ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
-            if (ois.readInt() == 1) {
+            int a = (Integer)ois.readObject();
+            if (a == 1) {
                 ArrayList<String> obj = new ArrayList();
                 String str = "";
                 for(Paciente p : h.getR().getCola()){
@@ -47,12 +48,7 @@ public class SocketController implements Runnable {
                 obj.add(str);
                 str = "";
                 // Parte de los containers
-                int a = 0;
                 for(String s: h.getV().getContainer().getStringArray()){
-                    if(a == 5){
-                        obj.add("A2");
-                        obj.add(Integer.toString(h.getVacuna().availablePermits()));
-                    }
                     obj.add(s);
                 }
                 // Segundo container
@@ -60,11 +56,15 @@ public class SocketController implements Runnable {
                     obj.add(s);
                 }
                 ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+                oos.flush();
+                obj.add(9, "A2");
+                obj.add(10, Integer.toString(h.getVacuna().availablePermits()));
                 oos.writeObject(obj);
             } else {
-                int a = (int) ois.readObject();
-                h.getV().blockPuesto(a-50);
+                System.out.println("LLeuge");
+                h.getV().blockPuesto(a-51);
             }
+            
         }catch(Exception e){}
         
         
