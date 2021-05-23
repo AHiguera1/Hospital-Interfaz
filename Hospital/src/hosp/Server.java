@@ -20,16 +20,17 @@ import java.util.concurrent.Semaphore;
  */
 public class Server extends Thread implements Serializable {
     private Hospital h;
-    private ServerSocket ss = new ServerSocket(7777);
+    private ServerSocket ss;
     ExecutorService es = Executors.newCachedThreadPool();
 
     public Server(Hospital h) {
         this.h = h;
-
+        
     }
 
     public void run() {
         try {
+            ss = new ServerSocket(7777);
             while (true) {
                 Socket s = ss.accept();
                 SocketController sc = new SocketController(h, s);

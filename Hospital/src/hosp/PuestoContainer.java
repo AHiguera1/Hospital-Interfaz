@@ -41,6 +41,20 @@ public class PuestoContainer implements Serializable {
 
     }
 
+    public ArrayList<String> getStringArray() {
+        ArrayList<String> aux = new ArrayList<String>();
+        if(mode){
+            for(int i = 1; i < 11; i++){
+                aux.add(puestoStatus(container.get(i)));
+            }
+        }
+        else{
+            for (int i = 1; i < 21; i++) {
+                aux.add(puestoStatus(container.get(i)));
+            }
+        }
+        return aux;
+    }
     public String puestoStatus(Puesto p) {
         String str = "";
         if (p.isBlocked())
