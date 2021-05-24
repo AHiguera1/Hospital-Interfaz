@@ -237,6 +237,7 @@ public class PuestoContainer implements Serializable {
             for (Puesto p : aux) {
                 if (p.getS() == null) {
                     p.setS(s);
+                    p.setBlocked(false);
                     printContainer20();
                     return p.getId();
                 }

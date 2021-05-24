@@ -39,6 +39,7 @@ public class Sanitario extends Thread implements Serializable {
             it.getjTextField4().setText(descansando());
             while (true) {
                 try {
+                    if(descanso.contains(this)) descanso.remove(this);
                     vc.getContainer().add(this);
                     while (cont < 15) {
                         vacunando.acquire(); // Espera a que llegue el paciente al puesto

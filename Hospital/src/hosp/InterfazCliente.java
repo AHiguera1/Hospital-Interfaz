@@ -176,7 +176,6 @@ public class InterfazCliente extends javax.swing.JFrame implements Serializable 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(null));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setText("SALA DE OBSERVACIÓN");
@@ -302,7 +301,7 @@ public class InterfazCliente extends javax.swing.JFrame implements Serializable 
         jTextField25.setText("jTextField13");
         jPanel1.add(jTextField25, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 50, 75, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 950, 150));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 950, 150));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -337,9 +336,8 @@ public class InterfazCliente extends javax.swing.JFrame implements Serializable 
         jTextField3.setText("jTextField3");
         jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 118, 102, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, 150));
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(null));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("SALA DE DESCANSO");
@@ -348,12 +346,11 @@ public class InterfazCliente extends javax.swing.JFrame implements Serializable 
         jTextField4.setText("jTextField4");
         jPanel4.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 53, 429, 87));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(429, 11, 510, -1));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(429, 11, 510, 160));
 
         jPanel5.setLayout(new java.awt.GridLayout(1, 0));
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 397, -1, 8));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(null));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setText("SALA DE VACUNACIÓN");
@@ -516,7 +513,7 @@ public class InterfazCliente extends javax.swing.JFrame implements Serializable 
         jTextField16.setText("jTextField16");
         jPanel3.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, -1, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 210, 950, 190));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 940, 190));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
