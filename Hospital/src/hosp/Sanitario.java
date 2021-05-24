@@ -49,7 +49,8 @@ public class Sanitario extends Thread implements Serializable {
                         sleep(3000 + (long) (rnd.nextInt(2000)));
                         vc.getLibre().release();
                         int a = vc.getContainer().getPuesto(this);
-                        vc.getContainer().get(a).getP().getVacc().release();
+                        if(vc.getContainer().get(a).getP() != null) vc.getContainer().get(a).getP().getVacc().release();
+                        else cont = 15; //esto solo ocurre cuando hay un cierre de puesto, por lo que se fuerza al sanitario a descansar
                         aux1.printVacuna(this);
                         vc.getContainer().remove(vc.getContainer().get(a).getP());
                     }
