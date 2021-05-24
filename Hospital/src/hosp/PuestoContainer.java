@@ -228,6 +228,7 @@ public class PuestoContainer implements Serializable {
             for (Puesto p : aux) {
                 if (p.getS() == null) {
                     p.setS(s);
+                    p.setBlocked(false);
                     printContainer10();
                     return p.getId();
                 }
@@ -271,7 +272,6 @@ public class PuestoContainer implements Serializable {
         if (mode) {
             for (Puesto p : aux) {
                 if (p.getS() == s) {
-                    p.setBlocked(false);
                     p.setS(null);
                     printContainer10();
                     return;
@@ -317,7 +317,7 @@ public class PuestoContainer implements Serializable {
         this.container.get(id).setBlocked(true);
         this.container.get(id).setS(null);
         this.container.get(id).setP(null);
-        Thread.sleep(3000);
+        
     }
 
     public int getPuesto(Sanitario s) {

@@ -27,7 +27,7 @@ public class Vacunacion implements Serializable{
         this.container = new PuestoContainer(it,true);
         this.it = it;
     }
-    public void blockPuesto(int id){
+    public void blockPuesto(int id) throws InterruptedException{
         switch(id){
                     case 0:
                         it.tf.get(4).setText("");                   
@@ -72,7 +72,8 @@ public class Vacunacion implements Serializable{
                     
         }
         Sanitario s = container.get(id).getS();
-        s.setCont(14);
+        s.getDescanso().add(s);
+        s.setCont(15);
         Paciente p = container.get(id).getP();
         container.remove(s);
         container.blockPuesto(id);
