@@ -28,61 +28,12 @@ public class Vacunacion implements Serializable{
         this.it = it;
     }
     public void blockPuesto(int id) throws InterruptedException{
-        switch(id){
-                    case 0:
-                        it.tf.get(4).setText("");                   
-                        it.tf.get(4).setText("{Cerrado}");                   
-                        break;
-                    case 1:
-                        it.tf.get(5).setText("");
-                        it.tf.get(5).setText("{Cerrado}");
-                        break;
-                    case 2:
-                        it.tf.get(6).setText("");
-                        it.tf.get(6).setText("{Cerrado}");
-                        break;
-                    case 3:
-                        it.tf.get(7).setText("");
-                        it.tf.get(7).setText("{Cerrado}");
-                        break;
-                    case 4:
-                        it.tf.get(8).setText("");
-                        it.tf.get(8).setText("{Cerrado}");
-                        break;
-                    case 5:
-                        it.tf.get(11).setText("");
-                        it.tf.get(11).setText("{Cerrado}");
-                        break;
-                    case 6:
-                        it.tf.get(12).setText("");
-                        it.tf.get(12).setText("{Cerrado}");
-                        break;
-                    case 7:
-                        it.tf.get(13).setText("");
-                        it.tf.get(13).setText("{Cerrado}");
-                        break;
-                    case 8:
-                        it.tf.get(14).setText("");
-                        it.tf.get(14).setText("{Cerrado}");
-                        break;
-                    case 9:
-                        it.tf.get(15).setText("");
-                        it.tf.get(15).setText("{Cerrado}");
-                        break;
-                    
-        }
+        
         Sanitario s = container.get(id).getS();
-        s.getDescanso().add(s);
-        s.setCont(15);
-        Paciente p = container.get(id).getP();
-        container.remove(s);
+        it.getjTextField4().setText(s.descansando());
+        s.setCont(15);    
         container.blockPuesto(id);
-        container.get(id).setBlocked(false);
         
-        
-     
-        
-    
     }
     
     public Semaphore getLibre() {

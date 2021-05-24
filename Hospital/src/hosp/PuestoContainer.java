@@ -58,7 +58,7 @@ public class PuestoContainer implements Serializable {
     public String puestoStatus(Puesto p) {
         String str = " ";
         if (p.isBlocked())
-            str = "{Cerrado}";
+            str = "{Cerrado}";            
         else {
             boolean a = p.getP() == null;
             boolean b = p.getS() == null;
@@ -252,6 +252,8 @@ public class PuestoContainer implements Serializable {
             for (Puesto p : aux) {
                 if (p.getP() == null && p.getS() != null) {
                     p.setP(pa);
+                    p.setBlocked(false);
+                    if(p.getS() != null) p.getS().getVacunando().release();
                     printContainer10();
                     return p.getId();
                 }
@@ -260,6 +262,8 @@ public class PuestoContainer implements Serializable {
             for (Puesto p : aux) {
                 if (p.getP() == null) {
                     p.setP(pa);
+                    if(p.getS() != null) p.getS().getVacunando().release();
+                    p.setBlocked(false);
                     printContainer20();
                     return p.getId();
                 }
@@ -274,6 +278,7 @@ public class PuestoContainer implements Serializable {
             for (Puesto p : aux) {
                 if (p.getS() == s) {
                     p.setS(null);
+                    p.setBlocked(false);
                     printContainer10();
                     return;
                 }
@@ -282,6 +287,7 @@ public class PuestoContainer implements Serializable {
             for (Puesto p : aux) {
                 if (p.getS() == s) {
                     p.setS(null);
+                    p.setBlocked(false);
                     printContainer20();
                     return;
                 }
@@ -316,8 +322,10 @@ public class PuestoContainer implements Serializable {
 
     public void blockPuesto(int id) throws InterruptedException {
         this.container.get(id).setBlocked(true);
-        this.container.get(id).setS(null);
-        this.container.get(id).setP(null);
+        if(mode)
+        printContainer10();
+        else
+            printContainer20();
         
     }
 

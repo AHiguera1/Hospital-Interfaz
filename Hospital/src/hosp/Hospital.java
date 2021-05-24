@@ -19,6 +19,8 @@ public class Hospital extends Thread implements Serializable {
     private Auxiliar1 aux1;
     private Auxiliar2 aux2;
     private Server s;
+ 
+    //private ArrayList<Sanitario> san;
 
     public Hospital(Interfaz it) {
         Logger.createLogger();
@@ -34,16 +36,19 @@ public class Hospital extends Thread implements Serializable {
         s = new Server(this);
         s.start();
 
+
     }
 
-    public void run() {
+    public void run() {        
         o.start();
         aux1.start();
         aux2.start();
         for (int i = 0; i < 10; i++) {
-
-            new Sanitario(i, v, vacuna, aux1, o, descanso, it).start();
+            Sanitario s = new Sanitario(i, v, vacuna, aux1, o, descanso, it);
+            s.start();
+            //san.add(s);
         }
+    
         for (int i = 0; i < 2000; i++) {
 
             new Paciente(r, i, o).start();
@@ -62,7 +67,7 @@ public class Hospital extends Thread implements Serializable {
          */
 
     }
-
+    
     public Interfaz getIt() {
         return it;
     }

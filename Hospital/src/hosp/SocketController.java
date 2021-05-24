@@ -62,7 +62,7 @@ public class SocketController implements Runnable {
                 oos.writeObject(obj);
             } else {
                 System.out.println("LLeuge");
-                h.getV().blockPuesto(a-51);
+                h.getV().blockPuesto(a - 50);
             }
             
         }catch(Exception e){}

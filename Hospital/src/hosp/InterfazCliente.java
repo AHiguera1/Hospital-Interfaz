@@ -209,7 +209,7 @@ public class InterfazCliente extends javax.swing.JFrame implements Serializable 
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 30, -1, -1));
 
         jLabel17.setText("Puesto 10");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 30, -1, -1));
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 30, -1, -1));
 
         jLabel32.setText("Puesto 11");
         jPanel1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 79, -1, -1));
@@ -251,7 +251,7 @@ public class InterfazCliente extends javax.swing.JFrame implements Serializable 
         jPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, -1, -1));
 
         jTextField34.setText("jTextField11");
-        jPanel1.add(jTextField34, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, -1, -1));
+        jPanel1.add(jTextField34, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 80, -1));
 
         jLabel39.setText("Puesto 18");
         jPanel1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 80, -1, -1));
@@ -263,13 +263,13 @@ public class InterfazCliente extends javax.swing.JFrame implements Serializable 
         jPanel1.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, -1, -1));
 
         jTextField36.setText("jTextField16");
-        jPanel1.add(jTextField36, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, -1, -1));
+        jPanel1.add(jTextField36, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 80, -1));
 
         jLabel41.setText("Puesto 20");
-        jPanel1.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 80, -1, -1));
+        jPanel1.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, -1, -1));
 
         jTextField27.setText("jTextField13");
-        jPanel1.add(jTextField27, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 100, 75, -1));
+        jPanel1.add(jTextField27, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 100, 75, -1));
 
         jTextField17.setText("jTextField5");
         jPanel1.add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 75, -1));
@@ -296,7 +296,7 @@ public class InterfazCliente extends javax.swing.JFrame implements Serializable 
         jPanel1.add(jTextField24, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 50, 75, -1));
 
         jTextField26.setText("jTextField16");
-        jPanel1.add(jTextField26, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 50, 76, -1));
+        jPanel1.add(jTextField26, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 50, 76, -1));
 
         jTextField25.setText("jTextField13");
         jPanel1.add(jTextField25, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 50, 75, -1));
@@ -481,7 +481,7 @@ public class InterfazCliente extends javax.swing.JFrame implements Serializable 
                 jButton20ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton20, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, -1, -1));
+        jPanel3.add(jButton20, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 150, -1, -1));
 
         jTextField5.setText("jTextField5");
         jPanel3.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 75, -1));
@@ -511,7 +511,7 @@ public class InterfazCliente extends javax.swing.JFrame implements Serializable 
         jPanel3.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 75, -1));
 
         jTextField16.setText("jTextField16");
-        jPanel3.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, -1, -1));
+        jPanel3.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 80, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 940, 190));
 
